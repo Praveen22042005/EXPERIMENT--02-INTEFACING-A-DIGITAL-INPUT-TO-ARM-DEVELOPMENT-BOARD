@@ -3,8 +3,6 @@
 ## Components required: STM32 CUBE IDE, ARM IOT development board,  STM programmer tool.
 ## Theory 
 The full form of an ARM is an advanced reduced instruction set computer (RISC) machine, and it is a 32-bit processor architecture expanded by ARM holdings. The applications of an ARM processor include several microcontrollers as well as processors. The architecture of an ARM processor was licensed by many corporations for designing ARM processor-based SoC products and CPUs. This allows the corporations to manufacture their products using ARM architecture. Likewise, all main semiconductor companies will make ARM-based SOCs such as Samsung, Atmel, TI etc.
-
- 
   
 ## Procedure:
  1. click on STM 32 CUBE IDE, the following screen will appear 
@@ -48,16 +46,45 @@ The full form of an ARM is an advanced reduced instruction set computer (RISC) m
 
 13. check for execution of the output using run option 
 
-
-
 ## STM 32 CUBE PROGRAM :
+DEVELOPED BY: PRAVEEN BV
+REG.NO: 212222100036
 
+#include "main.h"
+#include "stdbool.h"
+bool button_status;
+void push_button();
 
+void SystemClock_Config(void);
+static void MX_GPIO_Init(void);
 
+int main(void)
+{
+  while (1)
+  {
+	  push_button();
+  }
+}
+
+void push_button()
+{
+	button_status =HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13);
+	if(button_status == 0)
+	{
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+		HAL_Delay(1000);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+		HAL_Delay(1000);
+	}
+	else
+	{
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+	}
+}
 ## Output  :
- 
-## layout of the circuit 
- 
- 
+### LED OFF:
+ ![](pcm-22.jpg)
+ ### LED ON:
+ ![](pcm-21.jpg)
 ## Result :
 Interfacing a digital Input (Pushbutton ) with ARM microcontroller based IOT development is executed and the results are verified.
